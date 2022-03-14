@@ -5,8 +5,8 @@ const jwtCheck = require('../middlewares/auth/jwtCheck');
 const UserRouter = Router();
 
 
-// /users/login
+// /users
 UserRouter.post('/login', UserLoginRouter);
 UserRouter.get('/private', jwtCheck, UserPrivateRouter);
 
-module.exports = router;
+module.exports = UserRouter;

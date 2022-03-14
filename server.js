@@ -1,8 +1,8 @@
+require('dotenv').config();
 const express = require('express');
 const morgan = require('morgan');
 
 const UserRouter = require('./routes/index');
-require('dotenv').config();
 const server = express();
 
 
