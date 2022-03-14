@@ -27,6 +27,7 @@ module.exports = (req, res) => {
             const refreshToken = JWTAuth.createRefreshToken();
 
             RefreshTokenList.push(refreshToken);
+            console.log(RefreshTokenList)
 
             // refreshToken은 리스트(임시 redis)에 저장 후 둘다 응답
             res.json({

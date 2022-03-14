@@ -1,12 +1,7 @@
-const { Router } = require('express');
-const UserLoginRouter = require('./usersRoutes/login');
-const UserPrivateRouter = require('./usersRoutes/private');
-const jwtCheck = require('../middlewares/auth/jwtCheck');
-const UserRouter = Router();
+const UserRouter = require('./usersRoutes/index');
+const RefreshRouter = require('./refreshRoutes/refresh');
 
-
-// /users
-UserRouter.post('/login', UserLoginRouter);
-UserRouter.get('/private', jwtCheck, UserPrivateRouter);
-
-module.exports = UserRouter;
+module.exports = (server) => {
+    server.use("/users", UserRouter);
+    server.use("/refresh", RefreshRouter);
+}

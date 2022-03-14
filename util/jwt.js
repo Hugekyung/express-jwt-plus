@@ -23,15 +23,17 @@ class JWTAuth {
     }
 
     static verifyRefreshToken(accessToken, refreshToken) {
-        const isValid = JWT.verify(refreshToken, process.env.REFRESH_SECRET_KEY)
-        if (!isValid) {
-            return { status: 'Bad', message: 'Expired RefreshToken' }
-        }
-        if (isValid) {
-            // 엑세스토큰 재발급
-            const payload = JWT.decode(accessToken);
-            const newAccessToken = JWT.sign({ userid: payload.userid }, process.env.ACCESS_TOKEN, { expiresIn: '3m' });
-            return { status:'OK', accessToken: newAccessToken };
+        try {
+            const isValid = JWT.verify(refreshToken, process.env.REFRESH_SECRET_KEY)
+            console.log(isValid);
+            if (isValid) {
+                // 엑세스토큰 재발급
+                const payload = JWT.decode(accessToken);
+                const newAccessToken = JWT.sign({ userId: payload.userId }, process.env.ACCESS_SECRET_KEY, { expiresIn: '3m' });
+                return { result: true, accessToken: newAccessToken };
+            }
+        } catch (err) {
+            return { result: false, message: err.message };
         }
     }
 }

@@ -1,5 +1,6 @@
 
 module.exports = (req, res) => {
+    console.log(req.user);
     if (req.user) {
         res.json({ status: 'OK' });
     } else {
