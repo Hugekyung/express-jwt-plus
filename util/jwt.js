@@ -2,7 +2,7 @@ require('dotenv').config();
 const JWT = require('jsonwebtoken');
 
 class JWTAuth {
-    static createAccessToken({ payload }) {
+    static createAccessToken(payload) {
         const accessToken = JWT.sign({ userId: payload }, process.env.ACCESS_SECRET_KEY, { expiresIn: '3m'})
         return accessToken;
     }

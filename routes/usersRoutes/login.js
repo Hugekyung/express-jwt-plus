@@ -23,7 +23,7 @@ module.exports = (req, res) => {
         if (user.password === password) {
             // accessToken & refreshToken 발급
             const payload = user.userId;
-            const accessToken = JWTAuth.createAccessToken({ payload });
+            const accessToken = JWTAuth.createAccessToken(payload);
             const refreshToken = JWTAuth.createRefreshToken();
 
             RefreshTokenList.push(refreshToken);

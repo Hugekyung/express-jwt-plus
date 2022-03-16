@@ -14,6 +14,9 @@ RefreshRouter.post("/", (req, res) => {
         res.json({ message: "refreshToken expired"});
     }
 
+    // 리프레시토큰을 검증하기 전에, 리프레시토큰 db(redis)에서 일치하는 리프레시토큰이 있는지 확인하기
+    // redis에 일치하는 리프레시토큰이 있으면 검증
+    // 검증 후 유효하면 엑세스토큰 재발급, 만료됐다면 redis서버의 리프레시토큰 제거 후 만료메세지 응답
     const isValidRefresh = JWTAuth.verifyRefreshToken(accessToken, refreshToken);
     console.log(isValidRefresh)
     if (isValidRefresh.result) {
